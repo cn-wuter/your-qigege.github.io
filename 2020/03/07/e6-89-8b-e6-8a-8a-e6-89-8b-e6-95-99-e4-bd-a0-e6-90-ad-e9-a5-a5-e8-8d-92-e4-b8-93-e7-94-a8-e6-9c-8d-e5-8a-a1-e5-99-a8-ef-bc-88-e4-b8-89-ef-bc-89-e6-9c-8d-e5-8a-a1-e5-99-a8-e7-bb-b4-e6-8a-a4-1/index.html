@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"your-qigege.github.io","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="位置导航：首页&#x2F; 服务器相关 &#x2F; 饥荒注：本篇含代码结构，在电脑上观看体验更佳  一、预备篇：存档路径及文件树在讲解世界设置和MOD设置之前，讲一下之前已经生成好的世界的路径、文件树以及重要文件的作用，这里还是以A存档为例。 1、存档位置 如果是按照我的要求一步一步操作下来的话，云服务器饥荒存档路径为 &#x2F;root&#x2F;.klei&#x2F;DoNotStarveTogether          ##这个目录下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你搭饥荒专用服务器（三）—MOD及其他高级设置">
+<meta property="og:url" content="https://your-qigege.github.io/2020/03/07/e6-89-8b-e6-8a-8a-e6-89-8b-e6-95-99-e4-bd-a0-e6-90-ad-e9-a5-a5-e8-8d-92-e4-b8-93-e7-94-a8-e6-9c-8d-e5-8a-a1-e5-99-a8-ef-bc-88-e4-b8-89-ef-bc-89-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-bb-b4-e6-8a-a4-1/index.html">
+<meta property="og:site_name" content="木木|Ayuna">
+<meta property="og:description" content="位置导航：首页&#x2F; 服务器相关 &#x2F; 饥荒注：本篇含代码结构，在电脑上观看体验更佳  一、预备篇：存档路径及文件树在讲解世界设置和MOD设置之前，讲一下之前已经生成好的世界的路径、文件树以及重要文件的作用，这里还是以A存档为例。 1、存档位置 如果是按照我的要求一步一步操作下来的话，云服务器饥荒存档路径为 &#x2F;root&#x2F;.klei&#x2F;DoNotStarveTogether          ##这个目录下">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-21-1024x553.png">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-22-1024x541.png">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-23.png">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-24.png">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-25.png">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-26.png">
+<meta property="article:published_time" content="2020-03-07T12:40:02.000Z">
+<meta property="article:modified_time" content="2020-03-20T07:22:17.695Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-21-1024x553.png">
+
+<link rel="canonical" href="https://your-qigege.github.io/2020/03/07/e6-89-8b-e6-8a-8a-e6-89-8b-e6-95-99-e4-bd-a0-e6-90-ad-e9-a5-a5-e8-8d-92-e4-b8-93-e7-94-a8-e6-9c-8d-e5-8a-a1-e5-99-a8-ef-bc-88-e4-b8-89-ef-bc-89-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-bb-b4-e6-8a-a4-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>手把手教你搭饥荒专用服务器（三）—MOD及其他高级设置 | 木木|Ayuna</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">木木|Ayuna</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://your-qigege.github.io/2020/03/07/e6-89-8b-e6-8a-8a-e6-89-8b-e6-95-99-e4-bd-a0-e6-90-ad-e9-a5-a5-e8-8d-92-e4-b8-93-e7-94-a8-e6-9c-8d-e5-8a-a1-e5-99-a8-ef-bc-88-e4-b8-89-ef-bc-89-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-bb-b4-e6-8a-a4-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木木|Ayuna">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          手把手教你搭饥荒专用服务器（三）—MOD及其他高级设置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-07 20:40:02" itemprop="dateCreated datePublished" datetime="2020-03-07T20:40:02+08:00">2020-03-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-20 15:22:17" itemprop="dateModified" datetime="2020-03-20T15:22:17+08:00">2020-03-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">服务器相关</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/%E9%A5%A5%E8%8D%92/" itemprop="url" rel="index"><span itemprop="name">饥荒</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="位置导航：首页-服务器相关-饥荒"><a href="#位置导航：首页-服务器相关-饥荒" class="headerlink" title="位置导航：首页/ 服务器相关 / 饥荒"></a>位置导航：<a href="https://www.qimumu.top/" target="_blank" rel="noopener">首页</a>/ <a href="https://www.qimumu.top/category/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/" target="_blank" rel="noopener">服务器相关</a> / <a href="https://www.qimumu.top/category/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/%E9%A5%A5%E8%8D%92/" target="_blank" rel="noopener">饥荒</a></h4><p>注：本篇含代码结构，在电脑上观看体验更佳</p>
+<hr>
+<h3 id="一、预备篇：存档路径及文件树"><a href="#一、预备篇：存档路径及文件树" class="headerlink" title="一、预备篇：存档路径及文件树"></a><strong>一、预备篇：存档路径及文件树</strong></h3><p>在讲解世界设置和MOD设置之前，讲一下之前已经生成好的世界的路径、文件树以及重要文件的作用，这里还是以A存档为例。</p>
+<p><strong>1、存档位置</strong></p>
+<p>如果是按照我的要求一步一步操作下来的话，<strong>云服务器饥荒存档路径</strong>为</p>
+<p>/root/.klei/DoNotStarveTogether          ##这个目录下有饥荒的所有存档</p>
+<p><strong>本地饥荒存档路径</strong>为</p>
+<p>我的文档\Klei\DoNotStarveTogether         ##如果找不到就在游戏主页面点击左下角的“数据”</p>
+<p><strong>2、MOD存放位置</strong></p>
+<p><strong>本地MOD</strong>的存放路径为</p>
+<p><em>\Steam\steamapps\common\Don’t Starve Together\mods   ##这里的</em>指的是你本地安装STEAM的路径<br>D:\Steam\steamapps\common\Don’t Starve Together\mods  ##例如这是我的MOD位置</p>
+<p><strong>服务器MOD</strong>的存放路径为</p>
+<p>/root/Steam/steamapps/common/Don’t Starve Together Dedicated Server/mods </p>
+<p><strong>3、云服务器饥荒存档文件树</strong></p>
+<p>之前生成的文件树为以下结构</p>
+<p>/root/.klei/DoNotStarveTogether/A        ##这里以A存档为例<br> |  cluster.ini                          ##服务器总配置文件，包括端口、密码等<br> |  cluster_token.txt                    ##即第一节讲到的User Token<br> |  startcaves.sh                        ##洞穴启动代码<br> |  startmaster.sh                       ##地上启动代码<br> |——Master                               ##地上文件夹<br> |  |  modoverrides.lua                  ##地上的MOD配置文件<br> |  |  server.ini                        ##独立配置信息<br> |  |  leveldataoverride.lua             ##资源配置文件<br> |  |——backup文件夹                       ##存放备份文件<br> |  |——save文件夹                         ##存放你的回退信息<br> |<br> |——Caves<br>    |  modoverrides.lua                  ##洞穴的MOD配置文件<br>    |  server.ini                        ##独立配置信息<br>    |  leveldataoverride.lua             ##资源配置文件<br>    |  worldgenoverride.lua              ##想要自己调整世界资源的建议删除，因为此配置信息优先级高于leveldataoverride.lua，就算你修改了资源，系统还是全默认资源<br>    |——backup文件夹                       ##存放备份文件<br>    |——save文件夹                         ##存放你的回退信息</p>
+<p>★<strong>我将在本篇最底部附上配置文件的详细信息，喜欢全手动的小伙伴可以研究</strong></p>
+<h3 id="二、世界资源设置方法—移植法"><a href="#二、世界资源设置方法—移植法" class="headerlink" title="二、世界资源设置方法—移植法"></a><strong>二、世界资源设置方法—移植法</strong></h3><p>由于按照一键端生成的世界是全资源默认的纯净档，所以需要自己调整世界资源，我把此种方法称为<strong>移植法。</strong></p>
+<p>顾名思义既然要移植，就需要有一个现成的世界设置配置文件。（当然你可以自己配置，本篇末尾我给出了如何手动配置文件）</p>
+<h4 id="1、获取现成的世界资源配置文件"><a href="#1、获取现成的世界资源配置文件" class="headerlink" title="1、获取现成的世界资源配置文件"></a><strong>1、获取现成的世界资源配置文件</strong></h4><p>在你电脑上打开饥荒游戏，点击创建世界，选择一个没有用过的存档，我们以第一个为例， 按照你想要的资源进行调整，洞穴也要设置。MOD暂时可以一个都不选，我在下一块会详细讲MOD的设置。</p>
+<p><a href="http://www.qimumu.wang/2020/03/image-21.png" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-21-1024x553.png" alt=""></a></p>
+<p>点击创建世界，等到进入世界的时候，退出，这个时候你的配置文件已经生成啦！</p>
+<h4 id="2、上传你刚生成的资源文件"><a href="#2、上传你刚生成的资源文件" class="headerlink" title="2、上传你刚生成的资源文件"></a><strong>2、上传你刚生成的资源文件</strong></h4><p>如何找到这个配置文件呢，返回到主页面，点击左下角的“数据”即可打开本地的存档目录</p>
+<p><a href="http://www.qimumu.wang/2020/03/image-22.png" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-22-1024x541.png" alt=""></a></p>
+<p>打开之后是这种结构：</p>
+<p><a href="http://www.qimumu.wang/2020/03/image-23.png" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-23.png" alt=""></a></p>
+<p>因为我们是在第一个存档修改的，所以需要Cluster_1里面的文件</p>
+<p>（1）<strong>地上资源</strong>：打开 <code>Cluster_1 /Master/</code>,里面的<code>leveldataoverride.lua</code>就是地上世界的资源配置文件啦，把这个文件覆盖上传到你服务器的<code>/root/.klei/DoNotStarveTogether/A/Master</code>文件夹下，地上资源就配置好啦。</p>
+<p>（2）<strong>洞穴资源</strong>：接下来我们再覆盖洞穴的资源配置文件，在游戏主页面点“数据”，打开你的本地存档，打开 <code>Cluster_1 /Caves/</code> ，同理把洞穴文件夹下的 <code>leveldataoverride.lua</code> 覆盖 上传至你服务器的 <code>/root/.klei/DoNotStarveTogether/A/ Caves</code> ，至此，地上和洞穴世界的世界资源已经配置完成</p>
+<h4 id="3、为什么我登上去还是默认资源？"><a href="#3、为什么我登上去还是默认资源？" class="headerlink" title="3、为什么我登上去还是默认资源？"></a><strong>3、为什么我登上去还是默认资源？</strong></h4><p>因为你在启动服务器时，一键端已经帮你生成好了一个默认世界，要想使你自己修改的世界生效的话，需要在游戏中重新生成世界。</p>
+<p>方法：加入到你创建的游戏中，按键<code>Tab</code>键，在出现的面板里点<code>···</code>按钮，再点击生成世界即可。</p>
+<p><strong>★ 如果不想一键生成，世界资源手动配置方法附加在最底部</strong></p>
+<h3 id="三、MOD设置方法—移植法"><a href="#三、MOD设置方法—移植法" class="headerlink" title="三、MOD设置方法—移植法"></a><strong>三、MOD设置方法—移植法</strong></h3><p>学会了世界资源的移植法，MOD移植法也是同一个道理，主要分为以下三步</p>
+<h4 id="1、获取现成的MOD配置资源"><a href="#1、获取现成的MOD配置资源" class="headerlink" title="1、获取现成的MOD配置资源"></a><strong>1、获取现成的MOD配置资源</strong></h4><p>还是登陆游戏，选择创建游戏，我们还是以第一个存档为例，在模组里勾选你想添加的模组，点击回到世界。</p>
+<p><a href="http://www.qimumu.wang/2020/03/image-24.png" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-24.png" alt=""></a></p>
+<p>进入游戏之后就可以退出了， 此时MOD的配置文件已经通过游戏生成好了。</p>
+<h4 id="2、将生成的MOD配置文件覆盖上传"><a href="#2、将生成的MOD配置文件覆盖上传" class="headerlink" title="2、将生成的MOD配置文件覆盖上传"></a><strong>2、将生成的MOD配置文件覆盖上传</strong></h4><p>按照之前的方法，打开游戏保存位置</p>
+<p><a href="http://www.qimumu.wang/2020/03/image-25.png" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-25.png" alt=""></a></p>
+<p>因为我们是在第一个存档修改的，所以需要Cluster_1里面的文件</p>
+<p>（1）<strong>地上MOD</strong>： 打开 <code>Cluster_1 /Master/</code>,里面的<code>modoverrides.lua</code>就是地上世界的资源配置文件，把这个文件覆盖上传到你服务器的<code>/root/.klei/DoNotStarveTogether/A/Master</code>文件夹下，地上MOD就配置好啦。</p>
+<p>（2）<strong>洞穴MOD</strong>： 打开 <code>Cluster_1 /Master/</code>,里面的<code>modoverrides.lua</code>就是洞穴世界的资源配置文件，把这个文件覆盖上传到你服务器的<code>/root/.klei/DoNotStarveTogether/A/Master</code>文件夹下，洞穴MOD就配置好啦。</p>
+<h4 id="3、如何使MOD生效"><a href="#3、如何使MOD生效" class="headerlink" title="3、如何使MOD生效"></a><strong>3、如何使MOD生效</strong></h4><p>MOD覆盖上传之后，这时候还没有生效，因为你只是把配置文件上传了，但是还没有上传MOD的源文件。顶部预备篇我们已经提到本地MOD和服务器MOD源文件的存放路径，把本地MOD上传至服务器即可。</p>
+<p><em>\Steam\steamapps\common\Don’t Starve Together\mods                         ##这里的</em>指的是你本地安装STEAM的路径<br>                                 ↓上传至服务器<br>/root/Steam/steamapps/common/Don’t Starve Together Dedicated Server/mods    ##这是服务器MOD目录</p>
+<p>上传之后，重新登录游戏就可以啦！</p>
+<p><strong>★ MOD手动配置方法同样附加在最底部</strong></p>
+<h3 id="四、设置管理员（可选）"><a href="#四、设置管理员（可选）" class="headerlink" title="四、设置管理员（可选）"></a><strong>四、设置管理员（可选）</strong></h3><p>饥荒的管理员会有特殊操作权限，如果创建者不在而你因为特殊原因要回滚世界 ，就需要被赋予管理员权限才能执行回退世界的操作</p>
+<p>1、首先获取自己的KLEI<code>用户ID</code>，我在第一节提到过 ，进游戏之后点“账户”即可查看</p>
+<p>2、在服务器存档（比如之前建立的A存档）下新建一个文本文档，命名为<code>adminlist.txt</code>，将你的KLEI<code>用户ID</code>写进去就可以啦，保存退出。</p>
+<p><a href="http://www.qimumu.wang/2020/03/image-26.png" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-26.png" alt=""></a></p>
+<h3 id="五、设置白名单（可选）"><a href="#五、设置白名单（可选）" class="headerlink" title="五、设置白名单（可选）"></a><strong>五、设置白名单（可选）</strong></h3><p>如果人太多了，挤不进去怎么办</p>
+<p>这就需要提前给自己预留一个位置，如果服务器可以容纳8个人，设置两个白名单的话，那么相当于这个服务器只能进入6个普通用户。就算两个白名单没有上线，也只能进6个</p>
+<p>在存档根目录下新建<code>whitelist.txt</code>，在里面输入你的klei<code>用户ID</code>即可</p>
+<h3 id="六、如何BAN恶意操作用户"><a href="#六、如何BAN恶意操作用户" class="headerlink" title="六、如何BAN恶意操作用户"></a><strong>六、如何BAN恶意操作用户</strong></h3><p>如果有人进来就烧家、喂你植物纤维的话</p>
+<p>BAN他!</p>
+<p>在存档根目录下新建<code>blocklist.txt</code>，在里面输入他的klei<code>用户ID</code>，它的ID可以在日志信息中找到</p>
+<p>当然最简单的办法是在游戏中按下<code>Tab</code>，直接踢</p>
+<p><strong>只要掌握了如何修改资源和MOD，就可以正常游戏了，如果操作能力强的可以继续往下研究，我在本页底部会把每个配置文件的内容的作用列出来</strong></p>
+<hr>
+<h1 id="正文结束"><a href="#正文结束" class="headerlink" title="正文结束"></a><strong>正文结束</strong></h1><hr>
+<p><strong>声明：本资料仅供学习交流，严禁使用于任何商业用途，由此产生的版权纠纷本站不负任何责任！<br>如需转载，请注明出处：<a href="https://www.qimumu.top/category/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/%E9%A5%A5%E8%8D%92/" target="_blank" rel="noopener">www.qimumu.top</a></strong></p>
+<p>友情链接：</p>
+<p><a href="https://www.qimumu.top/2020/03/07/%e6%89%8b%e6%8a%8a%e6%89%8b%e6%95%99%e4%bd%a0%e6%90%ad%e9%a5%a5%e8%8d%92%e4%b8%93%e7%94%a8%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%88%e4%b8%80%ef%bc%89-%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%9b%b8%e5%85%b3/" target="_blank" rel="noopener"><strong>手把手教你搭饥荒专用服务器（一）—服务器准备工作</strong></a></p>
+<p><a href="https://www.qimumu.top/2020/03/07/%e6%89%8b%e6%8a%8a%e6%89%8b%e6%95%99%e4%bd%a0%e6%90%ad%e9%a5%a5%e8%8d%92%e4%b8%93%e7%94%a8%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%88%e4%ba%8c%ef%bc%89-%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae%e5%8f%8a/" target="_blank" rel="noopener"><strong>手把手教你搭饥荒专用服务器（二）—环境配置及基本使用</strong></a></p>
+<p><a href="https://www.qimumu.top/2020/03/07/%e6%89%8b%e6%8a%8a%e6%89%8b%e6%95%99%e4%bd%a0%e6%90%ad%e9%a5%a5%e8%8d%92%e4%b8%93%e7%94%a8%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%88%e4%b8%89%ef%bc%89-%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%bb%b4%e6%8a%a4/" target="_blank" rel="noopener"><strong>手把手教你搭饥荒专用服务器（三）—MOD及其他高级设置</strong></a></p>
+<p><a href="https://www.qimumu.top/2020/03/07/%e6%89%8b%e6%8a%8a%e6%89%8b%e6%95%99%e4%bd%a0%e6%90%ad%e9%a5%a5%e8%8d%92%e4%b8%93%e7%94%a8%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%88%e5%9b%9b%ef%bc%89-%e6%9c%ac%e5%9c%b0%e5%ad%98%e6%a1%a3%e8%bd%ac/" target="_blank" rel="noopener"><strong>手把手教你搭饥荒专用服务器（四）—本地存档转专用存档</strong></a></p>
+<hr>
+<h2 id="附：各配置文件信息及手动修改方法"><a href="#附：各配置文件信息及手动修改方法" class="headerlink" title="附：各配置文件信息及手动修改方法"></a><strong>附：各配置文件信息及手动修改方法</strong></h2><p><strong>所给的配置文件均在ubuntu系统下调试通过，可直接使用</strong></p>
+<hr>
+<h4 id="1、世界地图资源（地上部分）"><a href="#1、世界地图资源（地上部分）" class="headerlink" title="1、世界地图资源（地上部分）"></a><strong>1、世界地图资源（地上部分）</strong></h4><p>如需要自己配置，将以下内容保存为 <code>leveldataoverride.lua</code>,放入<code>Master</code>文件夹中</p>
+<p>return {<br>  desc=”标准《饥荒》体验。”,<br>  hideminimap=false,<br>  id=”SURVIVAL_TOGETHER”,<br>  location=”forest”,<br>  max_playlist_position=999,<br>  min_playlist_position=0,<br>  name=”默认”,<br>  numrandom_set_pieces=4,<br>  override_level_string=false,<br>  overrides = {                   ##以下为修改世界的各种选项<br>    ## 默认的资源等级分别为  “never”, “rare”, “default”, “often”, “always”</p>
+<pre><code>## 环境配置
+task\_set = &quot;default&quot;,         ## 默认为&quot;classic&quot;, &quot;default&quot;, &quot;cave\_default&quot;
+start_location = &quot;default&quot;,   ## 默认为&quot;caves&quot;, &quot;default&quot;, &quot;plus&quot;, &quot;darkness&quot;
+world_size = &quot;default&quot;,       ## 默认为&quot;small&quot;, &quot;medium&quot;, &quot;default&quot;, &quot;huge&quot;
+branching = &quot;default&quot;,        ## 默认为&quot;never&quot;, &quot;least&quot;, &quot;default&quot;, &quot;most&quot;
+loop = &quot;default&quot;,             ## 默认为&quot;never&quot;, &quot;default&quot;, &quot;always&quot;
+autumn = &quot;default&quot;,           ## 默认为&quot;noseason&quot;, &quot;veryshortseason&quot;, &quot;shortseason&quot;, &quot;default&quot;, &quot;longseason&quot;, &quot;verylongseason&quot;, &quot;random&quot;
+winter = &quot;default&quot;,            ## 默认为&quot;noseason&quot;, &quot;veryshortseason&quot;, &quot;shortseason&quot;, &quot;default&quot;, &quot;longseason&quot;, &quot;verylongseason&quot;, &quot;random&quot;
+spring = &quot;default&quot;,            ## 默认为&quot;noseason&quot;, &quot;veryshortseason&quot;, &quot;shortseason&quot;, &quot;default&quot;, &quot;longseason&quot;, &quot;verylongseason&quot;, &quot;random&quot;
+summer = &quot;default&quot;,            ## 默认为&quot;noseason&quot;, &quot;veryshortseason&quot;, &quot;shortseason&quot;, &quot;default&quot;, &quot;longseason&quot;, &quot;verylongseason&quot;, &quot;random&quot;
+season_start = &quot;default&quot;,     ## 默认为&quot;default&quot;, &quot;winter&quot;, &quot;spring&quot;, &quot;summer&quot;, &quot;autumnorspring&quot;, &quot;winterorsummer&quot;, &quot;random&quot;
+day = &quot;default&quot;,           ## 默认为&quot;default&quot;, &quot;longday&quot;, &quot;longdusk&quot;, &quot;longnight&quot;, &quot;noday&quot;, &quot;nodusk&quot;, &quot;nonight&quot;, &quot;onlyday&quot;, &quot;onlydusk&quot;, &quot;onlynight&quot;
+weather = &quot;default&quot;,
+earthquakes = &quot;default&quot;,
+lightning = &quot;default&quot;,
+frograin = &quot;default&quot;,
+wildfires = &quot;default&quot;,
+touchstone = &quot;default&quot;,
+regrowth = &quot;default&quot;,            ## 默认为&quot;veryslow&quot;, &quot;slow&quot;, &quot;default&quot;, &quot;fast&quot;, &quot;veryfast&quot;
+cavelight = &quot;default&quot;,         ## 默认为&quot;veryslow&quot;, &quot;slow&quot;, &quot;default&quot;, &quot;fast&quot;, &quot;veryfast&quot;
+boons = &quot;default&quot;,
+prefabswaps_start = &quot;default&quot;, ## 默认为&quot;classic&quot;, &quot;default&quot;, &quot;highly random&quot;
+prefabswaps = &quot;default&quot;,       ## 默认为&quot;none&quot;, &quot;few&quot;, &quot;default&quot;, &quot;many&quot;, &quot;max&quot;
+
+## 资源设置
+flowers = &quot;default&quot;,
+grass = &quot;default&quot;,
+sapling = &quot;default&quot;,
+marshbush = &quot;default&quot;,
+tumbleweed = &quot;default&quot;,
+reeds = &quot;default&quot;,
+trees = &quot;default&quot;,
+flint = &quot;default&quot;,
+rock = &quot;default&quot;,
+rock_ice = &quot;default&quot;,
+meteorspawner = &quot;default&quot;,
+meteorshowers = &quot;default&quot;,
+mushtree = &quot;default&quot;,
+fern = &quot;default&quot;,
+flower_cave = &quot;default&quot;,
+wormlights = &quot;default&quot;,
+
+## 随机设置
+berrybush = &quot;default&quot;,
+carrot = &quot;default&quot;,
+mushroom = &quot;default&quot;,
+cactus = &quot;default&quot;,
+banana = &quot;default&quot;,
+lichen = &quot;default&quot;,
+
+## 动物设置
+rabbits = &quot;default&quot;,
+moles = &quot;default&quot;,
+butterfly = &quot;default&quot;,
+birds = &quot;default&quot;,
+buzzard = &quot;default&quot;,
+catcoon = &quot;default&quot;,
+perd = &quot;default&quot;,
+pigs = &quot;default&quot;,
+lightninggoat = &quot;default&quot;,
+beefalo = &quot;default&quot;,
+beefaloheat = &quot;default&quot;,
+hunt = &quot;default&quot;,
+alternatehunt = &quot;default&quot;,
+penguins = &quot;default&quot;,
+cave_ponds = &quot;default&quot;,
+ponds = &quot;default&quot;,
+bees = &quot;default&quot;,
+angrybees = &quot;default&quot;,
+tallbirds = &quot;default&quot;,
+slurper = &quot;default&quot;,
+bunnymen = &quot;default&quot;,
+slurtles = &quot;default&quot;,
+rocky = &quot;default&quot;,
+monkey = &quot;default&quot;,
+
+## 怪物设置
+spiders = &quot;default&quot;,
+cave_spiders = &quot;default&quot;,
+hounds = &quot;default&quot;,
+houndmound = &quot;default&quot;,
+merm = &quot;default&quot;,
+tentacles = &quot;default&quot;,
+chess = &quot;default&quot;,
+lureplants = &quot;default&quot;,
+walrus = &quot;default&quot;,
+liefs = &quot;default&quot;,
+deciduousmonster = &quot;default&quot;,
+krampus = &quot;default&quot;,
+bearger = &quot;default&quot;,
+deerclops = &quot;default&quot;,
+goosemoose = &quot;default&quot;,
+dragonfly = &quot;default&quot;,
+bats = &quot;default&quot;,
+fissure = &quot;default&quot;,
+worms = &quot;default&quot;,</code></pre><p> },<br>}</p>
+<h3 id="2、世界地图资源（洞穴部分）"><a href="#2、世界地图资源（洞穴部分）" class="headerlink" title="2、世界地图资源（洞穴部分）"></a><strong>2、世界地图资源（洞穴部分）</strong></h3><p>如需要自己配置，将以下内容保存为  <code>leveldataoverride.lua</code> ,放入<code>Caves</code>文件夹中</p>
+<p>return {<br>  background_node_range={ 0, 1 },<br>  desc=”探查洞穴…… 一起！”,<br>  hideminimap=false,<br>  id=”DST_CAVE”,<br>  location=”cave”,<br>  max_playlist_position=999,<br>  min_playlist_position=0,<br>  name=”洞穴”,<br>  numrandom_set_pieces=0,<br>  override_level_string=false,<br>  overrides = {                    ##以下为修改世界的各种选项<br>    ## 默认的资源等级分别为”never”, “rare”, “default”, “often”, “always”</p>
+<pre><code>## 环境配置
+task\_set = &quot;cave\_default&quot;,   ## 默认为&quot;classic&quot;, &quot;default&quot;, &quot;cave_default&quot;
+start_location = &quot;default&quot;,  ##默认为 &quot;caves&quot;, &quot;default&quot;, &quot;plus&quot;, &quot;darkness&quot;
+world_size = &quot;default&quot;,        ## 默认为&quot;small&quot;, &quot;medium&quot;, &quot;default&quot;, &quot;huge&quot;
+branching = &quot;default&quot;,        ## 默认为&quot;never&quot;, &quot;least&quot;, &quot;default&quot;, &quot;most&quot;
+loop = &quot;default&quot;,            ## 默认为&quot;never&quot;, &quot;default&quot;, &quot;always&quot;
+autumn = &quot;default&quot;,           ## 默认为&quot;noseason&quot;, &quot;veryshortseason&quot;, &quot;shortseason&quot;, &quot;default&quot;, &quot;longseason&quot;, &quot;verylongseason&quot;, &quot;random&quot;
+winter = &quot;default&quot;,           ## 默认为&quot;noseason&quot;, &quot;veryshortseason&quot;, &quot;shortseason&quot;, &quot;default&quot;, &quot;longseason&quot;, &quot;verylongseason&quot;, &quot;random&quot;
+spring = &quot;default&quot;,           ## 默认为&quot;noseason&quot;, &quot;veryshortseason&quot;, &quot;shortseason&quot;, &quot;default&quot;, &quot;longseason&quot;, &quot;verylongseason&quot;, &quot;random&quot;
+summer = &quot;default&quot;,           ## 默认为&quot;noseason&quot;, &quot;veryshortseason&quot;, &quot;shortseason&quot;, &quot;default&quot;, &quot;longseason&quot;, &quot;verylongseason&quot;, &quot;random&quot;
+season_start = &quot;default&quot;,    ## 默认为&quot;default&quot;, &quot;winter&quot;, &quot;spring&quot;, &quot;summer&quot;, &quot;autumnorspring&quot;, &quot;winterorsummer&quot;, &quot;random&quot;
+day = &quot;default&quot;,             ## 默认为&quot;default&quot;, &quot;longday&quot;, &quot;longdusk&quot;, &quot;longnight&quot;, &quot;noday&quot;, &quot;nodusk&quot;, &quot;nonight&quot;, &quot;onlyday&quot;, &quot;onlydusk&quot;, &quot;onlynight&quot;
+weather = &quot;default&quot;,
+earthquakes = &quot;default&quot;,
+lightning = &quot;default&quot;,
+frograin = &quot;default&quot;,
+wildfires = &quot;default&quot;,
+touchstone = &quot;default&quot;,
+regrowth = &quot;default&quot;,              ## 默认为&quot;veryslow&quot;, &quot;slow&quot;, &quot;default&quot;, &quot;fast&quot;, &quot;veryfast&quot;
+cavelight = &quot;default&quot;,              ## 默认为&quot;veryslow&quot;, &quot;slow&quot;, &quot;default&quot;, &quot;fast&quot;, &quot;veryfast&quot;
+boons = &quot;default&quot;,
+prefabswaps_start = &quot;default&quot;,   ## 默认为&quot;classic&quot;, &quot;default&quot;, &quot;highly random&quot;
+prefabswaps = &quot;default&quot;,         ## 默认为&quot;none&quot;, &quot;few&quot;, &quot;default&quot;, &quot;many&quot;, &quot;max&quot;
+
+## 资源配置
+flowers = &quot;default&quot;,
+grass = &quot;default&quot;,
+sapling = &quot;default&quot;,
+marshbush = &quot;default&quot;,
+tumbleweed = &quot;default&quot;,
+reeds = &quot;default&quot;,
+trees = &quot;default&quot;,
+flint = &quot;default&quot;,
+rock = &quot;default&quot;,
+rock_ice = &quot;default&quot;,
+meteorspawner = &quot;default&quot;,
+meteorshowers = &quot;default&quot;,
+mushtree = &quot;default&quot;,
+fern = &quot;default&quot;,
+flower_cave = &quot;default&quot;,
+wormlights = &quot;default&quot;,
+
+## 随机配置
+berrybush = &quot;default&quot;,
+carrot = &quot;default&quot;,
+mushroom = &quot;default&quot;,
+cactus = &quot;default&quot;,
+banana = &quot;default&quot;,
+lichen = &quot;default&quot;,
+
+## 动物配置
+rabbits = &quot;default&quot;,
+moles = &quot;default&quot;,
+butterfly = &quot;default&quot;,
+birds = &quot;default&quot;,
+buzzard = &quot;default&quot;,
+catcoon = &quot;default&quot;,
+perd = &quot;default&quot;,
+pigs = &quot;default&quot;,
+lightninggoat = &quot;default&quot;,
+beefalo = &quot;default&quot;,
+beefaloheat = &quot;default&quot;,
+hunt = &quot;default&quot;,
+alternatehunt = &quot;default&quot;,
+penguins = &quot;default&quot;,
+cave_ponds = &quot;default&quot;,
+ponds = &quot;default&quot;,
+bees = &quot;default&quot;,
+angrybees = &quot;default&quot;,
+tallbirds = &quot;default&quot;,
+slurper = &quot;default&quot;,
+bunnymen = &quot;default&quot;,
+slurtles = &quot;default&quot;,
+rocky = &quot;default&quot;,
+monkey = &quot;default&quot;,
+
+## 怪物配置
+spiders = &quot;default&quot;,
+cave_spiders = &quot;default&quot;,
+hounds = &quot;default&quot;,
+houndmound = &quot;default&quot;,
+merm = &quot;default&quot;,
+tentacles = &quot;default&quot;,
+chess = &quot;default&quot;,
+lureplants = &quot;default&quot;,
+walrus = &quot;default&quot;,
+liefs = &quot;default&quot;,
+deciduousmonster = &quot;default&quot;,
+krampus = &quot;default&quot;,
+bearger = &quot;default&quot;,
+deerclops = &quot;default&quot;,
+goosemoose = &quot;default&quot;,
+dragonfly = &quot;default&quot;,
+bats = &quot;default&quot;,
+fissure = &quot;default&quot;,
+worms = &quot;default&quot;,</code></pre><p>  },<br>}</p>
+<h3 id="3、通用配置文件（即根目录下cluster-ini）"><a href="#3、通用配置文件（即根目录下cluster-ini）" class="headerlink" title="3、通用配置文件（即根目录下cluster.ini）"></a><strong>3、通用配置文件（即根目录下<code>cluster.ini</code>）</strong></h3><p>[GAMEPLAY]<br>max_players = 16                   # 最大游戏人数<br>pvp = true                         # 能不能攻击其他玩家，能不能给其他玩家喂屎<br>game_mode = survival               # 游戏模式，可选 survival, endless or wilderness，与玩家死亡后的负面影响有关<br>pause_when_empty = false           # 没人服务器暂停，刷天数必备<br>vote_kick_enabled = false          # 投票踢人</p>
+<p>[STEAM]<br>steam_group_only = false           # 只允许某 Steam 组的成员加入<br>steam_group_id = 0                 # 指定某个 Steam 组，填写组 ID<br>steam_group_admins = false         # 开启后，Steam 组的管理员拥有服务器的管理权限</p>
+<p>[NETWORK]<br>cluster_description = ~                # 游戏房间描述<br>cluster_name = ~                         # 游戏房间名称<br>cluster_intention = social         # 游戏偏好，可选 cooperative, competitive, social,  madness，随便设置，没用<br>cluster_password =                 # 游戏密码，不设置表示无密码<br>offline_server = false             # 是否离线服务器，只有局域网用户能加入，并且所有依赖于 Steam 的任何功能都无效，比如说饰品掉落<br>tick_rate = 15                     # 每秒通信次数，越高游戏体验越好，但是会加大服务器负担<br>whitelist_slots = 0                # 为白名单用户保留的游戏位<br>lan_only_cluster = false           # 局域网游戏</p>
+<p>[MISC]<br>console_enabled = true             # 是否开启控制台<br>max_snapshots = 6                  # 最大快照数，决定了可回滚的天数</p>
+<p>[SHARD]<br>shard_enabled = true               # 是否允许地上及洞穴互通，开启洞穴的话必须填true<br>bind_ip = 127.0.0.1                    # 服务器监听的地址，单服务器搭建填 127.0.0.1，双服务器搭建填0.0.0.0<br>master_ip = 127.0.0.1                    # 主世界服务器的 IP，单服务器搭建填127.0.0.1，双服务器搭建填写服务器的公网IP<br>master_port = 10889                      # 监听 master 服务器的 UDP 端口<br>cluster_key = supersecretkey       # 游戏通讯密码，每台服务器必须相同</p>
+<h3 id="4、独立配置文件（Master和Caves下的server-ini）"><a href="#4、独立配置文件（Master和Caves下的server-ini）" class="headerlink" title="4、独立配置文件（Master和Caves下的server.ini）"></a><strong>4、独立配置文件（<code>Master</code>和<code>Caves</code>下的<code>server.ini</code>）</strong></h3><p>（1） <strong>地上部分，保存为 <code>server.ini</code>，并放到 <code>Master</code> 文件夹内：</strong></p>
+<p>[NETWORK]<br>server_port = 11000                # 监听的 UDP 端口，只能介于 10998 - 11018 之间，确保每个实例都不相同</p>
+<p>[SHARD]<br>is_master = true                 # 是否是 master 服务器，只能存在一个 true，其他全是 false</p>
+<p>[STEAM]<br>master_server_port = 27018        # Steam 用的端口，确保每个实例都不相同<br>authentication_port = 8768        # Steam 用的端口，确保每个实例都不相同</p>
+<p>[ACCOUNT]<br>encode_user_path = true</p>
+<p>（2） <strong>洞穴部分，保存为 <code>server.ini</code>，放到 <code>Caves</code> 文件夹内：</strong></p>
+<p>[NETWORK]<br>server_port = 11001                # 监听的 UDP 端口，只能介于 10998 - 11018 之间，确保每个实例都不相同</p>
+<p>[SHARD]<br>is_master = false                 # 是否是 master 服务器，只能存在一个 true，其他全是 false<br>name = Caves                 # 从世界的名称<br>id = 3156403571              # 随机生成，不用加入该属性</p>
+<p>[STEAM]<br>master_server_port = 27019        # Steam 用的端口，确保每个实例都不相同<br>authentication_port = 8769        # Steam 用的端口，确保每个实例都不相同</p>
+<p>[ACCOUNT]<br>encode_user_path = true</p>
+<h3 id="5、MOD配置文件"><a href="#5、MOD配置文件" class="headerlink" title="5、MOD配置文件"></a><strong>5、MOD配置文件</strong></h3><p>因为MOD设置地上和洞穴是一样的，配置完一个之后一式两份拷贝到 <strong><code>Master</code></strong> 和 <strong><code>Caves</code></strong> 就可以了。</p>
+<p>这里给出我配置的MOD文件作为参考</p>
+<p>return {<br>  [“workshop-1079538195”]={<br>    configuration_options={<br>      beebox=true,<br>      birdcage=true,<br>      cartographydesk=true,<br>      cookpot=true,<br>      dragonflychest=true,<br>      dragonflyfurnace=true,<br>      endtable=true,<br>      firesuppressor=true,<br>      icebox=true,<br>      lightning_rod=true,<br>      meatrack=true,<br>      modsupport=true,<br>      moondial=true,<br>      mushroom_farm=true,<br>      mushroom_light=true,<br>      nightlight=true,<br>      perdshrine=true,<br>      pottedfern=true,<br>      rainometer=true,<br>      researchlab=true,<br>      researchlab2=true,<br>      researchlab3=true,<br>      researchlab4=true,<br>      resurrectionstatue=true,<br>      saltlick=true,<br>      scarecrow=true,<br>      sculptingtable=true,<br>      succulent_potted=true,<br>      townportal=true,<br>      treasurechest=true,<br>      wardrobe=true,<br>      winterometer=true<br>    },<br>    enabled=true<br>  },<br>  [“workshop-1166220990”]={ configuration_options={ attract=2, language=2 }, enabled=true },<br>  [“workshop-1185229307”]={ configuration_options={  }, enabled=true },<br>  [“workshop-1699194522”]={ configuration_options={ Language=true }, enabled=true },<br>  [“workshop-1829477822”]={ configuration_options={  }, enabled=true },<br>  [“workshop-1914860022”]={ configuration_options={  }, enabled=true },<br>  [“workshop-1914899068”]={<br>    configuration_options={<br>      [“”]=0,<br>      BATTLE_HAT_ABSORPTION=80,<br>      BATTLE_HAT_HP=12000,<br>      BATTLE_SPEAR_DAMAGE=42.5,<br>      BATTLE_SPEAR_USES=400,<br>      HAMBAT_DAMAGE=110.5,<br>      HAMBAT_PERISHABLE=”NO”,<br>      hat_goldnugget=1,<br>      hat_rocks=1,<br>      spear_flint=1,<br>      spear_goldnugget=1,<br>      spear_twigs=1<br>    },<br>    enabled=true<br>  },<br>  [“workshop-347079953”]={<br>    configuration_options={ DFV_Language=”CN”, DFV_MinimalMode=”default” },<br>    enabled=true<br>  },<br>  [“workshop-362175979”]={ configuration_options={ [“Draw over FoW”]=”disabled” }, enabled=true },<br>  [“workshop-374550642”]={ configuration_options={ MAXSTACKSIZE=250 }, enabled=true },<br>  [“workshop-375850593”]={ configuration_options={  }, enabled=true },<br>  [“workshop-375859599”]={<br>    configuration_options={<br>      divider=5,<br>      random_health_value=0,<br>      random_range=0,<br>      send_unknwon_prefabs=false,<br>      show_type=0,<br>      unknwon_prefabs=1,<br>      use_blacklist=true<br>    },<br>    enabled=true<br>  },<br>  [“workshop-378160973”]={<br>    configuration_options={<br>      ENABLEPINGS=true,<br>      FIREOPTIONS=2,<br>      OVERRIDEMODE=false,<br>      SHAREMINIMAPPROGRESS=true,<br>      SHOWFIREICONS=true,<br>      SHOWPLAYERICONS=true,<br>      SHOWPLAYERSOPTIONS=2<br>    },<br>    enabled=true<br>  },<br>  [“workshop-462434129”]={<br>    configuration_options={<br>      MOD_RESTART_ALLOW_KILL=true,<br>      MOD_RESTART_ALLOW_RESTART=true,<br>      MOD_RESTART_ALLOW_RESURRECT=true,<br>      MOD_RESTART_CD_BONUS=0,<br>      MOD_RESTART_CD_KILL=0,<br>      MOD_RESTART_CD_MAX=0,<br>      MOD_RESTART_CD_RESTART=0,<br>      MOD_RESTART_CD_RESURRECT=0,<br>      MOD_RESTART_FORCE_DROP_MODE=0,<br>      MOD_RESTART_IGNORING_ADMIN=true,<br>      MOD_RESTART_MAP_SAVE=1,<br>      MOD_RESTART_RESURRECT_HEALTH=100,<br>      MOD_RESTART_TRIGGER_MODE=1,<br>      MOD_RESTART_WELCOME_TIPS=true,<br>      MOD_RESTART_WELCOME_TIPS_TIME=6<br>    },<br>    enabled=true<br>  },<br>  [“workshop-466732225”]={ configuration_options={  }, enabled=true },<br>  [“workshop-588560555”]={ configuration_options={  }, enabled=true },<br>  [“workshop-661253977”]={<br>    configuration_options={ amudiao=true, baodiao=1, kong=0, rendiao=2, zbdiao=true },<br>    enabled=true<br>  },<br>  [“workshop-666155465”]={<br>    configuration_options={<br>      chestB=-1,<br>      chestG=-1,<br>      chestR=-1,<br>      food_estimation=-1,<br>      food_order=0,<br>      food_style=1,<br>      lang=”chs”,<br>      show_food_units=-1,<br>      show_uses=-1<br>    },<br>    enabled=true<br>  },<br>  [“workshop-679636739”]={ configuration_options={  }, enabled=true },<br>  [“workshop-770901818”]={<br>    configuration_options={ days=2, enable_houndattack=true, format=”complex” },<br>    enabled=true<br>  }<br>}</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/07/e6-89-8b-e6-8a-8a-e6-89-8b-e6-95-99-e4-bd-a0-e6-90-ad-e9-a5-a5-e8-8d-92-e4-b8-93-e7-94-a8-e6-9c-8d-e5-8a-a1-e5-99-a8-ef-bc-88-e4-b8-89-ef-bc-89-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-bb-b4-e6-8a-a4/" rel="prev" title="手把手教你搭饥荒专用服务器（三）—MOD及其他高级设置">
+      <i class="fa fa-chevron-left"></i> 手把手教你搭饥荒专用服务器（三）—MOD及其他高级设置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/07/e6-89-8b-e6-8a-8a-e6-89-8b-e6-95-99-e4-bd-a0-e6-90-ad-e9-a5-a5-e8-8d-92-e4-b8-93-e7-94-a8-e6-9c-8d-e5-8a-a1-e5-99-a8-ef-bc-88-e5-9b-9b-ef-bc-89-e6-9c-ac-e5-9c-b0-e5-ad-98-e6-a1-a3-e8-bd-ac/" rel="next" title="手把手教你搭饥荒专用服务器（四）—本地存档转专用存档">
+      手把手教你搭饥荒专用服务器（四）—本地存档转专用存档 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#位置导航：首页-服务器相关-饥荒"><span class="nav-number">1.</span> <span class="nav-text">位置导航：首页&#x2F; 服务器相关 &#x2F; 饥荒</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、预备篇：存档路径及文件树"><span class="nav-number"></span> <span class="nav-text">一、预备篇：存档路径及文件树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、世界资源设置方法—移植法"><span class="nav-number"></span> <span class="nav-text">二、世界资源设置方法—移植法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、获取现成的世界资源配置文件"><span class="nav-number">1.</span> <span class="nav-text">1、获取现成的世界资源配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、上传你刚生成的资源文件"><span class="nav-number">2.</span> <span class="nav-text">2、上传你刚生成的资源文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、为什么我登上去还是默认资源？"><span class="nav-number">3.</span> <span class="nav-text">3、为什么我登上去还是默认资源？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、MOD设置方法—移植法"><span class="nav-number"></span> <span class="nav-text">三、MOD设置方法—移植法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、获取现成的MOD配置资源"><span class="nav-number">1.</span> <span class="nav-text">1、获取现成的MOD配置资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、将生成的MOD配置文件覆盖上传"><span class="nav-number">2.</span> <span class="nav-text">2、将生成的MOD配置文件覆盖上传</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、如何使MOD生效"><span class="nav-number">3.</span> <span class="nav-text">3、如何使MOD生效</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、设置管理员（可选）"><span class="nav-number"></span> <span class="nav-text">四、设置管理员（可选）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、设置白名单（可选）"><span class="nav-number"></span> <span class="nav-text">五、设置白名单（可选）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、如何BAN恶意操作用户"><span class="nav-number"></span> <span class="nav-text">六、如何BAN恶意操作用户</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文结束"><span class="nav-number"></span> <span class="nav-text">正文结束</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#附：各配置文件信息及手动修改方法"><span class="nav-number"></span> <span class="nav-text">附：各配置文件信息及手动修改方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、世界地图资源（地上部分）"><span class="nav-number">1.</span> <span class="nav-text">1、世界地图资源（地上部分）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、世界地图资源（洞穴部分）"><span class="nav-number"></span> <span class="nav-text">2、世界地图资源（洞穴部分）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、通用配置文件（即根目录下cluster-ini）"><span class="nav-number"></span> <span class="nav-text">3、通用配置文件（即根目录下cluster.ini）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、独立配置文件（Master和Caves下的server-ini）"><span class="nav-number"></span> <span class="nav-text">4、独立配置文件（Master和Caves下的server.ini）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、MOD配置文件"><span class="nav-number"></span> <span class="nav-text">5、MOD配置文件</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">107</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

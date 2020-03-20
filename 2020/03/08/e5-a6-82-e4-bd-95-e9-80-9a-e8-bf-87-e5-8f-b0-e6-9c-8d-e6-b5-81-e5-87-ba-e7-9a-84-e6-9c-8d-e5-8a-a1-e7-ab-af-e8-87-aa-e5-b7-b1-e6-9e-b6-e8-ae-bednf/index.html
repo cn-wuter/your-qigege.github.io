@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"your-qigege.github.io","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="位置导航：首页&#x2F; 服务器相关 &#x2F; DNF  不建议尝试，且涉及到版权问题，这里就简写，需要具体资源可以联系我 一、服务端配置1、服务器要求：只能使用centOS 5.8 64位，且安全组开放所有端口（不建议尝试） 2、上传服务器文件DNFServer.tar.gz和install至服务器根目录（不是&#x2F;root目录，是 &#x2F; 目录）。赋予0777权限，命令执行bash install ，等待执行即可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何通过台服流出的服务端自己架设DNF">
+<meta property="og:url" content="https://your-qigege.github.io/2020/03/08/e5-a6-82-e4-bd-95-e9-80-9a-e8-bf-87-e5-8f-b0-e6-9c-8d-e6-b5-81-e5-87-ba-e7-9a-84-e6-9c-8d-e5-8a-a1-e7-ab-af-e8-87-aa-e5-b7-b1-e6-9e-b6-e8-ae-bednf/index.html">
+<meta property="og:site_name" content="木木|Ayuna">
+<meta property="og:description" content="位置导航：首页&#x2F; 服务器相关 &#x2F; DNF  不建议尝试，且涉及到版权问题，这里就简写，需要具体资源可以联系我 一、服务端配置1、服务器要求：只能使用centOS 5.8 64位，且安全组开放所有端口（不建议尝试） 2、上传服务器文件DNFServer.tar.gz和install至服务器根目录（不是&#x2F;root目录，是 &#x2F; 目录）。赋予0777权限，命令执行bash install ，等待执行即可">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-35.png">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-30.png">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-33.png">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-32-1024x768.png">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-34.png">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-27.png">
+<meta property="og:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-28.png">
+<meta property="article:published_time" content="2020-03-08T14:42:27.000Z">
+<meta property="article:modified_time" content="2020-03-20T07:11:38.210Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="DNF">
+<meta property="article:tag" content="服务端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.qimumu.wang/wp-content/uploads/2020/03/image-35.png">
+
+<link rel="canonical" href="https://your-qigege.github.io/2020/03/08/e5-a6-82-e4-bd-95-e9-80-9a-e8-bf-87-e5-8f-b0-e6-9c-8d-e6-b5-81-e5-87-ba-e7-9a-84-e6-9c-8d-e5-8a-a1-e7-ab-af-e8-87-aa-e5-b7-b1-e6-9e-b6-e8-ae-bednf/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>如何通过台服流出的服务端自己架设DNF | 木木|Ayuna</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">木木|Ayuna</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://your-qigege.github.io/2020/03/08/e5-a6-82-e4-bd-95-e9-80-9a-e8-bf-87-e5-8f-b0-e6-9c-8d-e6-b5-81-e5-87-ba-e7-9a-84-e6-9c-8d-e5-8a-a1-e7-ab-af-e8-87-aa-e5-b7-b1-e6-9e-b6-e8-ae-bednf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木木|Ayuna">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何通过台服流出的服务端自己架设DNF
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-08 22:42:27" itemprop="dateCreated datePublished" datetime="2020-03-08T22:42:27+08:00">2020-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-20 15:11:38" itemprop="dateModified" datetime="2020-03-20T15:11:38+08:00">2020-03-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DNF/" itemprop="url" rel="index"><span itemprop="name">DNF</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DNF/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">服务器相关</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>位置导航：<a href="https://www.qimumu.top/" target="_blank" rel="noopener">首页</a>/ <a href="https://www.qimumu.top/category/%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%9b%b8%e5%85%b3/" target="_blank" rel="noopener">服务器相关</a> / <a href="https://www.qimumu.top/category/%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%9b%b8%e5%85%b3/dnf/" target="_blank" rel="noopener">DNF</a></p>
+<hr>
+<p><strong>不建议尝试，且涉及到版权问题，这里就简写，需要具体资源可以联系我</strong></p>
+<h3 id="一、服务端配置"><a href="#一、服务端配置" class="headerlink" title="一、服务端配置"></a>一、服务端配置</h3><p>1、服务器要求：只能使用centOS 5.8 64位，且安全组开放所有端口（不建议尝试）</p>
+<p>2、上传服务器文件<code>DNFServer.tar.gz</code>和<code>install</code>至服务器根目录（不是<code>/root</code>目录，是 <code>/</code> 目录）。赋予<code>0777</code>权限，命令执行<code>bash install</code> ，等待执行即可</p>
+<p>3、将登记补丁 <code>df_game_r</code> 、公钥<code>publickey.pem</code> 、 <code>script.pvf</code>文件（三件套）上传至<code>/home/neople/game</code>并赋予 <code>0777</code> 权限</p>
+<p>4、跑程序即可，至此客户端已配置完成</p>
+<p>cd /root<br>./ run</p>
+<p><strong>当然此处也可以自己更改网关，便于管理游戏</strong></p>
+<h3 id="二、客户端"><a href="#二、客户端" class="headerlink" title="二、客户端"></a><strong>二、客户端</strong></h3><p>1、需要内容如下</p>
+<p><code>Fonts</code> 、<code>ImagePacks2</code> 、 <code>Music</code> 、<code>SoudPacks</code> ，四个文件夹</p>
+<p><code>audio.xml</code> 、 <code>DNF.exe</code> 、 <code>DNFlogin.exe</code> 、<code>DNFtoml</code> 四个文件及上面提到的三件套</p>
+<p>2、修改<code>DNF.toml</code>文件，将IP地址改为你的服务器公网IP地址</p>
+<h3 id="三、维护"><a href="#三、维护" class="headerlink" title="三、维护"></a><strong>三、维护</strong></h3><p>1、开服及关服操作</p>
+<p>cd /root<br>./ run           ##开服<br>./stop ./stop    ##关服需要stop两次</p>
+<p>2、数据库位置</p>
+<p>/opt/lampp/car/mysql   ##用户名game 密码uu5!^%jg</p>
+<p>3、数据库操作</p>
+<p>cd /opt/lampp<br>./lampp stopmysql    ##关闭数据库<br>./lampp startmysql   ##运行数据库</p>
+<h3 id="四、注意事项"><a href="#四、注意事项" class="headerlink" title="四、注意事项"></a><strong>四、注意事项</strong></h3><p>1、服务端需要跑出五国，即下面的代码</p>
+<p>GeoIP Allow Country Code :<br>GeoIP AlLow Country Code : CN<br>GeoIP Allow Country Code : HK<br>GeoIP Allow Country Code : KR<br>GeoIP Allow Country Code : MO<br>GeoIP Allow Country Code : TW<br>GeoIP Allow Country Code :<br>GeoIP AlLow Country Code : CN<br>GeoIP Allow Country Code : HK<br>GeoIP Allow Country Code : KR<br>GeoIP Allow Country Code : MO<br>GeoIP Allow Country Code : TW<br>[!] Connect To Monitor Server<br>[!] Connect To Guild Server</p>
+<p>2、灰色频道一般是你端口没开</p>
+<hr>
+<p><strong>声明：本资料仅供学习交流，严禁使用于任何商业用途，由此产生的版权纠纷本站不负任何责任！</strong></p>
+<hr>
+<p><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-35.png" alt=""></p>
+<p><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-30.png" alt=""></p>
+<p><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-33.png" alt=""></p>
+<p><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-32-1024x768.png" alt=""></p>
+<p><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-34.png" alt=""></p>
+<p><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-27.png" alt=""></p>
+<p><img src="http://www.qimumu.wang/wp-content/uploads/2020/03/image-28.png" alt=""></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DNF/" rel="tag"># DNF</a>
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E7%AB%AF/" rel="tag"># 服务端</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/07/e6-89-8b-e6-8a-8a-e6-89-8b-e6-95-99-e4-bd-a0-e6-90-ad-e9-a5-a5-e8-8d-92-e4-b8-93-e7-94-a8-e6-9c-8d-e5-8a-a1-e5-99-a8-ef-bc-88-e5-9b-9b-ef-bc-89-e6-9c-ac-e5-9c-b0-e5-ad-98-e6-a1-a3-e8-bd-ac-1/" rel="prev" title="手把手教你搭饥荒专用服务器（四）—本地存档转专用存档">
+      <i class="fa fa-chevron-left"></i> 手把手教你搭饥荒专用服务器（四）—本地存档转专用存档
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/08/e5-a6-82-e4-bd-95-e9-80-9a-e8-bf-87-e5-8f-b0-e6-9c-8d-e6-b5-81-e5-87-ba-e7-9a-84-e6-9c-8d-e5-8a-a1-e7-ab-af-e8-87-aa-e5-b7-b1-e6-9e-b6-e8-ae-bednf-1/" rel="next" title="如何通过台服流出的服务端自己架设DNF">
+      如何通过台服流出的服务端自己架设DNF <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、服务端配置"><span class="nav-number">1.</span> <span class="nav-text">一、服务端配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、客户端"><span class="nav-number">2.</span> <span class="nav-text">二、客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、维护"><span class="nav-number">3.</span> <span class="nav-text">三、维护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、注意事项"><span class="nav-number">4.</span> <span class="nav-text">四、注意事项</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">107</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

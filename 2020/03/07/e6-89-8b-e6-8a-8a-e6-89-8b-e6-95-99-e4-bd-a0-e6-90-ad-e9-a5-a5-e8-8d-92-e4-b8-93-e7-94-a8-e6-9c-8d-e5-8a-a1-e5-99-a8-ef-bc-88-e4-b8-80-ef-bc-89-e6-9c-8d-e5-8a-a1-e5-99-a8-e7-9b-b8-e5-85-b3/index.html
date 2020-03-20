@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"your-qigege.github.io","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="位置导航：首页&#x2F; 服务器相关 &#x2F; 饥荒 不少饥荒玩家在游戏时经常有这种感觉： （1）天亮自动保存时卡成狗，如果正好遇到Hound Attack，那…. （2）天数越多服务器越卡，尤其是在基地掉帧严重，fps甚至能降到15-？ （3）加入别人的服务器历经千辛万苦：搜不到对方服务器、即使搜到对方服务器也进不去、即使进去了也是延迟严重，走一步退十步？ （4）别人是主机时，自己的游戏数据保存在别人电脑里，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你搭饥荒专用服务器（一）—服务器准备工作">
+<meta property="og:url" content="https://your-qigege.github.io/2020/03/07/e6-89-8b-e6-8a-8a-e6-89-8b-e6-95-99-e4-bd-a0-e6-90-ad-e9-a5-a5-e8-8d-92-e4-b8-93-e7-94-a8-e6-9c-8d-e5-8a-a1-e5-99-a8-ef-bc-88-e4-b8-80-ef-bc-89-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-b8-e5-85-b3/index.html">
+<meta property="og:site_name" content="木木|Ayuna">
+<meta property="og:description" content="位置导航：首页&#x2F; 服务器相关 &#x2F; 饥荒 不少饥荒玩家在游戏时经常有这种感觉： （1）天亮自动保存时卡成狗，如果正好遇到Hound Attack，那…. （2）天数越多服务器越卡，尤其是在基地掉帧严重，fps甚至能降到15-？ （3）加入别人的服务器历经千辛万苦：搜不到对方服务器、即使搜到对方服务器也进不去、即使进去了也是延迟严重，走一步退十步？ （4）别人是主机时，自己的游戏数据保存在别人电脑里，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.qimumu.wang/2020/03/1-1.png">
+<meta property="og:image" content="http://www.qimumu.wang/2020/03/2-e1583518871144.png">
+<meta property="og:image" content="https://www.qimumu.wang/2020/03/image-3.png">
+<meta property="og:image" content="http://www.qimumu.wang/2020/03/image-4.png">
+<meta property="og:image" content="http://www.qimumu.wang/2020/03/image-5.png">
+<meta property="og:image" content="http://www.qimumu.wang/2020/03/image-6.png">
+<meta property="og:image" content="http://www.qimumu.wang/2020/03/image-7.png">
+<meta property="og:image" content="http://www.qimumu.wang/2020/03/image-10.png">
+<meta property="og:image" content="http://www.qimumu.wang/2020/03/image-9.png">
+<meta property="article:published_time" content="2020-03-06T16:03:05.000Z">
+<meta property="article:modified_time" content="2020-03-20T07:11:38.210Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.qimumu.wang/2020/03/1-1.png">
+
+<link rel="canonical" href="https://your-qigege.github.io/2020/03/07/e6-89-8b-e6-8a-8a-e6-89-8b-e6-95-99-e4-bd-a0-e6-90-ad-e9-a5-a5-e8-8d-92-e4-b8-93-e7-94-a8-e6-9c-8d-e5-8a-a1-e5-99-a8-ef-bc-88-e4-b8-80-ef-bc-89-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-b8-e5-85-b3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>手把手教你搭饥荒专用服务器（一）—服务器准备工作 | 木木|Ayuna</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">木木|Ayuna</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://your-qigege.github.io/2020/03/07/e6-89-8b-e6-8a-8a-e6-89-8b-e6-95-99-e4-bd-a0-e6-90-ad-e9-a5-a5-e8-8d-92-e4-b8-93-e7-94-a8-e6-9c-8d-e5-8a-a1-e5-99-a8-ef-bc-88-e4-b8-80-ef-bc-89-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-b8-e5-85-b3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木木|Ayuna">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          手把手教你搭饥荒专用服务器（一）—服务器准备工作
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-07 00:03:05" itemprop="dateCreated datePublished" datetime="2020-03-07T00:03:05+08:00">2020-03-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-20 15:11:38" itemprop="dateModified" datetime="2020-03-20T15:11:38+08:00">2020-03-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">服务器相关</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/%E9%A5%A5%E8%8D%92/" itemprop="url" rel="index"><span itemprop="name">饥荒</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="位置导航：首页-服务器相关-饥荒"><a href="#位置导航：首页-服务器相关-饥荒" class="headerlink" title="位置导航：首页/ 服务器相关 / 饥荒"></a>位置导航：<a href="https://www.qimumu.top/" target="_blank" rel="noopener">首页</a>/ <a href="https://www.qimumu.top/category/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/" target="_blank" rel="noopener">服务器相关</a> / <a href="https://www.qimumu.top/category/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/%E9%A5%A5%E8%8D%92/" target="_blank" rel="noopener">饥荒</a></h4><hr>
+<p>不少饥荒玩家在游戏时经常有这种感觉：</p>
+<p>（1）天亮自动保存时卡成狗，如果正好遇到Hound Attack，那….</p>
+<p>（2）天数越多服务器越卡，尤其是在基地掉帧严重，fps甚至能降到15-？</p>
+<p>（3）加入别人的服务器历经千辛万苦：搜不到对方服务器、即使搜到对方服务器也进不去、即使进去了也是延迟严重，走一步退十步？</p>
+<p>（4）别人是主机时，自己的游戏数据保存在别人电脑里，只有别人想玩游戏的时候你才能加进去？</p>
+<p>（5）因为误操作重置世界或者其他原因想要回退，却发现官方只提供5次保存数据？</p>
+<p>（6）浏览游戏时看到别人的专用服务器，自己想搭建却又局限于自己的电脑水平望而却步？</p>
+<p>别怕！ <strong>电脑小白？没关系！</strong> 今天开始<strong>零基础教学</strong>，手把手教你如何搭建专属于自己的专用服务器，让你随时随地加入自己的专属服务器！</p>
+<h3 id="一、服务器的选择"><a href="#一、服务器的选择" class="headerlink" title="一、服务器的选择"></a><strong>一、服务器的选择</strong></h3><h4 id="1、虚拟机"><a href="#1、虚拟机" class="headerlink" title="1、虚拟机"></a>1、虚拟机</h4><p>相对于云服务器来说，虚拟机无论是在性能方面还是操作难度上，都不适合新人操作。</p>
+<p>个人推荐云服务器，因为各大厂商都针对在校大学生群体推出了<strong>学生机配置</strong>，只有社会售价的<strong>0.1折~1折</strong>，毕竟一个月的花费都比不上你在学校食堂<strong>吃一顿饭的饭钱</strong>。</p>
+<h4 id="2、云服务器（阿里叫ECS、腾讯叫CVM）"><a href="#2、云服务器（阿里叫ECS、腾讯叫CVM）" class="headerlink" title="2、云服务器（阿里叫ECS、腾讯叫CVM）"></a>2、云服务器（阿里叫ECS、腾讯叫CVM）</h4><p>对于云服务商提供的服务器来说，1核1G的服务器足够带动2<del>3个人同时在线，其实主要局限是CPU和带宽，一般计算方法是**1M带宽（实际速度128kb/s）能支持2</del>3个人**，以此类推。</p>
+<p>推荐Ubuntu系统，目前在14.04 64位系统、16.04 64位系统、16.06 64位系统下均调试通过，不保证其他版本可用。</p>
+<p><strong>好啦废话不多说，教学开始！</strong></p>
+<h3 id="二、需要用到的软件（提供下载链接）"><a href="#二、需要用到的软件（提供下载链接）" class="headerlink" title="二、需要用到的软件（提供下载链接）"></a><strong>二、需要用到的软件（提供下载链接）</strong></h3><p>1、SSH客户端-Putty（用于远程发送操作命令）</p>
+<p>2、WINSCP（用于远程传输文件）</p>
+<p>这两个文件尽量不要在百度上搜索下载，不能保证他们捆绑了盗取账号的代码，这里提供官方原版下载链接</p>
+<p>Putty 64位</p>
+<p><em><a href="https://the.earth.li/~sgtatham/putty/0.73/w64/putty-64bit-0.73-installer.msi" target="_blank" rel="noopener"><strong>（点击下载）</strong></a></em></p>
+<p>Putty 32位</p>
+<p><strong><a href="https://the.earth.li/~sgtatham/putty/0.73/w32/putty-0.73-installer.msi" target="_blank" rel="noopener"><em>（点击下载）</em></a></strong></p>
+<p>WinSCP</p>
+<p><a href="https://qimumu.wang/2020/03/WinSCP-5.15.9-Setup.exe" target="_blank" rel="noopener"><strong><em>（点击下载）</em></strong></a></p>
+<h3 id="三、服务器配置及准备工作"><a href="#三、服务器配置及准备工作" class="headerlink" title="三、服务器配置及准备工作"></a><strong>三、服务器配置及准备工作</strong></h3><h4 id="1、配置安全组（很重要）"><a href="#1、配置安全组（很重要）" class="headerlink" title="1、配置安全组（很重要）"></a>1、配置安全组（很重要）</h4><p>购买服务器之后先去控制台添加安全组，配置如下</p>
+<p>协议类型:UDP（饥荒使用UDP协议）</p>
+<p>端口范围：10800-12000（很多教程为了方便就说开放全部端口，这样很不安全，强烈反对）</p>
+<p>授权对象：0.0.0.0/0</p>
+<p>下图为阿里云和腾讯云添加安全组截图：</p>
+<p><a href="https://www.qimumu.wang/2020/03/1-1.png" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/2020/03/1-1.png" alt=""></a></p>
+<p><a href="http://www.qimumu.wang/2020/03/2-e1583518871144.png" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/2020/03/2-e1583518871144.png" alt=""></a></p>
+<h4 id="2、获取饥荒令牌（User-Token）"><a href="#2、获取饥荒令牌（User-Token）" class="headerlink" title="2、获取饥荒令牌（User Token）"></a>2、获取饥荒令牌（User Token）</h4><p>最简单的方法是直接打开游戏，在主页面点击左下角的“账号”</p>
+<p><a href="http://www.qimumu.wang/2020/03/image-3.png" target="_blank" rel="noopener"><img src="https://www.qimumu.wang/2020/03/image-3.png" alt=""></a></p>
+<p>在弹出的Steam框架中选择最顶部的“游戏”， 这里推荐使用<strong>uu加速器</strong>，加速<strong>Steam商店</strong>（不是加速饥荒）</p>
+<p><a href="http://www.qimumu.wang/2020/03/image-4.png" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/2020/03/image-4.png" alt=""></a></p>
+<p>然后点击“饥荒联机版的游戏服务器”</p>
+<p><a href="http://www.qimumu.wang/2020/03/image-5.png" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/2020/03/image-5.png" alt=""></a></p>
+<p>之后输入一个好听的名字，这个名字可以随便去取，它并不是别人在浏览游戏时搜到的那个房间名</p>
+<p><a href="http://www.qimumu.wang/2020/03/image-6.png" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/2020/03/image-6.png" alt=""></a></p>
+<p>比如我随便输入“啥啥啥”，点击“添加新服务器”，你的饥荒令牌就产生了</p>
+<p><a href="http://www.qimumu.wang/2020/03/image-7.png" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/2020/03/image-7.png" alt=""></a></p>
+<h4 id="3、MOD订阅"><a href="#3、MOD订阅" class="headerlink" title="3、MOD订阅"></a>3、MOD订阅</h4><p>这个应该不用我多说，uu加速器<strong>加速Steam商城</strong>，在<strong>Steam库</strong>里找到饥荒，点击“<strong>创意工坊</strong>”，找到你喜欢的MOD订阅就可以啦</p>
+<p>只说明一点，就是MOD的<strong>存放路径</strong>，之后给服务器上传MOD的时候需要用到</p>
+<p>你的Steam安装位置\steamapps\common\Don’t Starve Together\mods,例如我安装在D盘，就是D:\Steam\steamapps\common\Don’t Starve Together\mods</p>
+<h4 id="4、服务端游戏环境配置文件"><a href="#4、服务端游戏环境配置文件" class="headerlink" title="4、服务端游戏环境配置文件"></a>4、服务端游戏环境配置文件</h4><p>这里我提供<strong>一键架设代码</strong>，可以一键添加swap分区、下载Steam运行环境、饥荒专用服务器运行环境，只要按照我的提示一步步操作即可。</p>
+<p>分别是swap.sh和go.sh，点击图片即可下载，<strong>下载之后放到同一个文件夹里</strong>，准备之后上传到你的服务器。</p>
+<p><a href="https://www.qimumu.top/wp-content/uploads/DST_tools/swap.sh" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/2020/03/image-10.png" alt=""></a></p>
+<p><strong><a href="https://www.qimumu.top/wp-content/uploads/DST_tools/swap.sh" target="_blank" rel="noopener">（点击下载）</a></strong></p>
+<p><a href="https://www.qimumu.top/wp-content/uploads/DST_tools/go.sh" target="_blank" rel="noopener"><img src="http://www.qimumu.wang/2020/03/image-9.png" alt=""></a></p>
+<p><strong><a href="https://www.qimumu.top/wp-content/uploads/DST_tools/go.sh" target="_blank" rel="noopener">（点击下载）</a></strong></p>
+<h3 id="四、新用户优惠链接"><a href="#四、新用户优惠链接" class="headerlink" title="四、新用户优惠链接"></a><strong>四、新用户优惠链接</strong></h3><p>这里推荐阿里云或腾讯云，毕竟是老牌云服务提供商，当然京东云、百度云、滴滴云也支持，但是从服务态度、处理速度上都是远远比不过阿里和腾讯的</p>
+<p><strong>阿里云</strong>：一定要选<strong>100%性能基线</strong>的，推荐n4或s6，1核1G/2G均可&gt;&gt;&gt;&gt;&gt;&gt;[**传送门  </p>
+<p><strong>](<a href="https://www.aliyun.com/sale-season/2020/procurement-new-members?source=5176.11533457&amp;userCode=3ims21bt&amp;type=copy" target="_blank" rel="noopener">https://www.aliyun.com/sale-season/2020/procurement-new-members?source=5176.11533457&amp;userCode=3ims21bt&amp;type=copy</a>)</strong>腾讯云<strong>：一年只要99，相比起一年2000+的原价来说已经很良心了，而且最低配置1核2G，推荐s2&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;[</strong>传送门**](<a href="https://cloud.tencent.com/act/cps/redirect?redirect=1052&amp;cps_key=0b51b01eb9abbd8418fb7865313c10a5&amp;from=console" target="_blank" rel="noopener">https://cloud.tencent.com/act/cps/redirect?redirect=1052&amp;cps_key=0b51b01eb9abbd8418fb7865313c10a5&amp;from=console</a>)</p>
+<p>好啦，第一部分准备工作先讲到这里，第二部分讲游戏环境配置以及基本使用（开关服、游戏更新、世界及Mod设置）</p>
+<hr>
+<p><strong>声明：本资料仅供学习交流，严禁使用于任何商业用途，由此产生的版权纠纷本站不负任何责任！<br>如需转载，请注明出处：<a href="https://www.qimumu.top/category/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/%E9%A5%A5%E8%8D%92/" target="_blank" rel="noopener">www.qimumu.top</a></strong></p>
+<p>友情链接：</p>
+<p><a href="https://www.qimumu.top/2020/03/07/%e6%89%8b%e6%8a%8a%e6%89%8b%e6%95%99%e4%bd%a0%e6%90%ad%e9%a5%a5%e8%8d%92%e4%b8%93%e7%94%a8%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%88%e4%b8%80%ef%bc%89-%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%9b%b8%e5%85%b3/" target="_blank" rel="noopener"><strong>手把手教你搭饥荒专用服务器（一）—服务器准备工作</strong></a></p>
+<p><a href="https://www.qimumu.top/2020/03/07/%e6%89%8b%e6%8a%8a%e6%89%8b%e6%95%99%e4%bd%a0%e6%90%ad%e9%a5%a5%e8%8d%92%e4%b8%93%e7%94%a8%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%88%e4%ba%8c%ef%bc%89-%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae%e5%8f%8a/" target="_blank" rel="noopener"><strong>手把手教你搭饥荒专用服务器（二）—环境配置及基本使用</strong></a></p>
+<p><a href="https://www.qimumu.top/2020/03/07/%e6%89%8b%e6%8a%8a%e6%89%8b%e6%95%99%e4%bd%a0%e6%90%ad%e9%a5%a5%e8%8d%92%e4%b8%93%e7%94%a8%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%88%e4%b8%89%ef%bc%89-%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%bb%b4%e6%8a%a4/" target="_blank" rel="noopener"><strong>手把手教你搭饥荒专用服务器（三）—MOD及其他高级设置</strong></a></p>
+<p><a href="https://www.qimumu.top/2020/03/07/%e6%89%8b%e6%8a%8a%e6%89%8b%e6%95%99%e4%bd%a0%e6%90%ad%e9%a5%a5%e8%8d%92%e4%b8%93%e7%94%a8%e6%9c%8d%e5%8a%a1%e5%99%a8%ef%bc%88%e5%9b%9b%ef%bc%89-%e6%9c%ac%e5%9c%b0%e5%ad%98%e6%a1%a3%e8%bd%ac/" target="_blank" rel="noopener"><strong>手把手教你搭饥荒专用服务器（四）—本地存档转专用存档</strong></a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/06/e6-b0-94-e5-8a-a8-e6-8a-80-e6-9c-af-e7-ac-94-e8-ae-b0-1/" rel="prev" title="气动技术笔记">
+      <i class="fa fa-chevron-left"></i> 气动技术笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/07/e6-89-8b-e6-8a-8a-e6-89-8b-e6-95-99-e4-bd-a0-e6-90-ad-e9-a5-a5-e8-8d-92-e4-b8-93-e7-94-a8-e6-9c-8d-e5-8a-a1-e5-99-a8-ef-bc-88-e4-b8-80-ef-bc-89-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-b8-e5-85-b3-1/" rel="next" title="手把手教你搭饥荒专用服务器（一）—服务器准备工作">
+      手把手教你搭饥荒专用服务器（一）—服务器准备工作 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#位置导航：首页-服务器相关-饥荒"><span class="nav-number">1.</span> <span class="nav-text">位置导航：首页&#x2F; 服务器相关 &#x2F; 饥荒</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、服务器的选择"><span class="nav-number"></span> <span class="nav-text">一、服务器的选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、虚拟机"><span class="nav-number">1.</span> <span class="nav-text">1、虚拟机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、云服务器（阿里叫ECS、腾讯叫CVM）"><span class="nav-number">2.</span> <span class="nav-text">2、云服务器（阿里叫ECS、腾讯叫CVM）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、需要用到的软件（提供下载链接）"><span class="nav-number"></span> <span class="nav-text">二、需要用到的软件（提供下载链接）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、服务器配置及准备工作"><span class="nav-number"></span> <span class="nav-text">三、服务器配置及准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、配置安全组（很重要）"><span class="nav-number">1.</span> <span class="nav-text">1、配置安全组（很重要）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、获取饥荒令牌（User-Token）"><span class="nav-number">2.</span> <span class="nav-text">2、获取饥荒令牌（User Token）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、MOD订阅"><span class="nav-number">3.</span> <span class="nav-text">3、MOD订阅</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、服务端游戏环境配置文件"><span class="nav-number">4.</span> <span class="nav-text">4、服务端游戏环境配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、新用户优惠链接"><span class="nav-number"></span> <span class="nav-text">四、新用户优惠链接</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">107</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
